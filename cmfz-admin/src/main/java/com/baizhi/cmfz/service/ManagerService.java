@@ -6,4 +6,6 @@ public interface ManagerService {
 
     public Manager queryManager(Manager mgr);
 
+    public int addManager(Manager mgr);
+
 }

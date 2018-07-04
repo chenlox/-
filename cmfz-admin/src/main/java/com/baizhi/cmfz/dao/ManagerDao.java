@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Param;
 
 public interface ManagerDao {
 
-    public Manager selectManager(@Param("manager_id") String managerId);
+    public Manager selectManager(@Param("managerName") String managerName);
+
+    public int insertManager(Manager mgr);
 
 }

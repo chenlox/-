@@ -15,25 +15,17 @@
 	<script type="text/javascript">
 	
 		$(function(){
-			//点击更换验证码：
-			$("#captchaImage").click(function(){//点击更换验证码
-			});
-			
 			//  form 表单提交
-			$("#loginForm").bind("submit",function(){
+			$("#registerForm").bind("submit",function(){
 
 			});
 		});
-
-		function add(){
-		    location.href="${pageContext.request.contextPath}/register.jsp";
-		}
 	</script>
 </head>
 <body>
 	
 		<div class="login">
-			<form id="loginForm" action="${pageContext.request.contextPath}/manager/login.do" method="post" >
+			<form id="registerForm" action="${pageContext.request.contextPath}/manager/register" method="post" >
 				
 				<table>
 					<tbody>
@@ -56,16 +48,6 @@
 								<input type="password" name="ManagerPassword" class="text" value="" maxlength="20" autocomplete="off"/>
 							</td>
 					  </tr>
-					
-						<tr>
-							<td>&nbsp;</td>
-							<th>验证码:</th>
-							<td>
-								<input type="text" id="enCode" name="enCode" class="text captcha" maxlength="4" autocomplete="off"/>
-								<img id="captchaImage" class="captchaImage" src="${pageContext.request.contextPath}/getImage/getCode.do" title="点击更换验证码"
-									 onclick="document.getElementById('captchaImage').src='${pageContext.request.contextPath}/getImage/getCode.do?<%=Math.random()%>'"/>
-							</td>
-						</tr>					
 					<tr>
 						<td>
 							&nbsp;
@@ -73,18 +55,12 @@
 						<th>
 							&nbsp;
 						</th>
-						<td>
-							<label>
-								<input type="checkbox" id="isRememberUsername" value="true"/> 记住用户名
-							</label>
-						</td>
 					</tr>
 					<tr>
 						<td>&nbsp;</td>
 						<th>&nbsp;</th>
 						<td>
-							<input type="button" class="homeButton" value="" onclick="location.href='/'"><input type="submit" class="loginButton" value="登录">
-							<input type="button" class="homeButton" value="" onclick="location.href='/'"><input type="button" class="loginButton" onclick="add()" value="注册">
+							<input type="button" class="homeButton" value="" onclick="location.href='/'"><input type="submit" class="loginButton" value="注册">
 						</td>
 					</tr>
 				</tbody></table>

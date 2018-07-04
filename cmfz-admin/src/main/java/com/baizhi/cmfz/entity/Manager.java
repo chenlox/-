@@ -13,17 +13,24 @@ public class Manager implements Serializable {
     private String managerId;
     private String managerName;
     private String managerPassword;
-    private String solt;
+    private String salt;
     private String status;
 
     public Manager() {
     }
 
-    public Manager(String managerId, String managerName, String managerPassword, String solt, String status) {
+    public Manager(String managerId, String managerName, String managerPassword, String salt, String status) {
         this.managerId = managerId;
         this.managerName = managerName;
         this.managerPassword = managerPassword;
-        this.solt = solt;
+        this.salt = salt;
+        this.status = status;
+    }
+
+    public Manager(String managerId, String managerName, String managerPassword, String status) {
+        this.managerId = managerId;
+        this.managerName = managerName;
+        this.managerPassword = managerPassword;
         this.status = status;
     }
 
@@ -51,12 +58,12 @@ public class Manager implements Serializable {
         this.managerPassword = managerPassword;
     }
 
-    public String getSolt() {
-        return solt;
+    public String getSalt() {
+        return salt;
     }
 
-    public void setSolt(String solt) {
-        this.solt = solt;
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public String getStatus() {
@@ -73,7 +80,7 @@ public class Manager implements Serializable {
                 "managerId='" + managerId + '\'' +
                 ", managerName='" + managerName + '\'' +
                 ", managerPassword='" + managerPassword + '\'' +
-                ", solt='" + solt + '\'' +
+                ", solt='" + salt + '\'' +
                 ", status='" + status + '\'' +
                 '}';
     }
