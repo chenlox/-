@@ -9,6 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 
+
+/**
+ * @Description 管理员控制层,控制页面跳转
+ * @Author  陈龙祥
+ * @Time    2018-07-04 15:30:30
+ */
 @Controller
 @RequestMapping("/manager")
 public class ManagerController {
@@ -24,7 +30,7 @@ public class ManagerController {
         }
         Manager manager = ms.queryManager(mgr);
         if(manager != null){
-            return "redirect:/index.jsp";
+            return "redirect:/main.jsp";
         }
         return "redirect:/login.jsp";
     }

@@ -25,7 +25,7 @@
 <body>
 	
 		<div class="login">
-			<form id="registerForm" action="${pageContext.request.contextPath}/manager/register" method="post" >
+			<form id="registerForm" action="${pageContext.request.contextPath}/manager/register.do" method="post" >
 				
 				<table>
 					<tbody>

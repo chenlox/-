@@ -11,17 +11,17 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 
 public class NewValidateCodeUtils {
-	// ͼƬ�Ŀ�ȡ�
+	// 图片的宽度。
 	private int width = 160;
-	// ͼƬ�ĸ߶ȡ�
+	// 图片的高度。
 	private int height = 40;
-	// ��֤���ַ�����
+	// 验证码字符个数
 	private int codeCount = 4;
-	// ��֤���������
+	// 验证码干扰线数
 	private int lineCount = 20;
-	// ��֤��
+	// 验证码
 	private String code = null;
-	// ��֤��ͼƬBuffer
+	// 验证码图片Buffer
 	private BufferedImage buffImg = null;
 	Random random = new Random();
 
@@ -50,26 +50,26 @@ public class NewValidateCodeUtils {
 		creatImage();
 	}
 
-	// ����ͼƬ
+	// 生成图片
 	private void creatImage() {
-		int fontWidth = width / codeCount;// ����Ŀ��
-		int fontHeight = height - 5;// ����ĸ߶�
+		int fontWidth = width / codeCount;// 字体的宽度
+		int fontHeight = height - 5;// 字体的高度
 		int codeY = height - 8;
 
-		// ͼ��buffer
+		// 图像buffer
 		buffImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		Graphics g = buffImg.getGraphics();
 		// Graphics2D g = buffImg.createGraphics();
-		// ���ñ���ɫ
+		// 设置背景色
 		g.setColor(getRandColor(200, 250));
 		g.fillRect(0, 0, width, height);
 
-		// ��������
+		// 设置字体
 		// Font font1 = getFont(fontHeight);
 		Font font = new Font("Fixedsys", Font.BOLD, fontHeight);
 		g.setFont(font);
 
-		// ���ø�����
+		// 设置干扰线
 		for (int i = 0; i < lineCount; i++) {
 			int xs = random.nextInt(width);
 			int ys = random.nextInt(height);
@@ -79,8 +79,8 @@ public class NewValidateCodeUtils {
 			g.drawLine(xs, ys, xe, ye);
 		}
 
-		// ������
-		float yawpRate = 0.01f;// ������
+		// 添加噪点
+		float yawpRate = 0.01f;// 噪声率
 		int area = (int) (yawpRate * width * height);
 		for (int i = 0; i < area; i++) {
 			int x = random.nextInt(width);
@@ -89,20 +89,20 @@ public class NewValidateCodeUtils {
 			buffImg.setRGB(x, y, random.nextInt(255));
 		}
 
-		String str1 = randomStr(codeCount);// �õ�����ַ�
+		String str1 = randomStr(codeCount);// 得到随机字符
 		this.code = str1;
 		for (int i = 0; i < codeCount; i++) {
 			String strRand = str1.substring(i, i + 1);
 			g.setColor(getRandColor(1, 255));
 			// g.drawString(a,x,y);
-			// aΪҪ�������Ķ�����x��y��ʾҪ���Ķ���������ַ��Ļ���λ�ڴ�ͼ������������ϵ�� (x, y) λ�ô�
+			// a为要画出来的东西，x和y表示要画的东西最左侧字符的基线位于此图形上下文坐标系的 (x, y) 位置处
 
 			g.drawString(strRand, i * fontWidth + 3, codeY);
 		}
 
 	}
 
-	// �õ�����ַ�
+	// 得到随机字符
 	private String randomStr(int n) {
 		String str1 = "abcdefghijklmnopqrstuvwxyz1234567890";
 		String str2 = "";
@@ -115,8 +115,8 @@ public class NewValidateCodeUtils {
 		return str2;
 	}
 
-	// �õ������ɫ
-	private Color getRandColor(int fc, int bc) {// ������Χ��������ɫ
+	// 得到随机颜色
+	private Color getRandColor(int fc, int bc) {// 给定范围获得随机颜色
 		if (fc > 255)
 			fc = 255;
 		if (bc > 255)
@@ -128,7 +128,7 @@ public class NewValidateCodeUtils {
 	}
 
 	/**
-	 * �����������
+	 * 产生随机字体
 	 */
 	private Font getFont(int size) {
 		Random random = new Random();
@@ -141,7 +141,7 @@ public class NewValidateCodeUtils {
 		return font[random.nextInt(5)];
 	}
 
-	// Ť������
+	// 扭曲方法
 	private void shear(Graphics g, int w1, int h1, Color color) {
 		shearX(g, w1, h1, color);
 		shearY(g, w1, h1, color);
@@ -158,8 +158,8 @@ public class NewValidateCodeUtils {
 		for (int i = 0; i < h1; i++) {
 			double d = (double) (period >> 1)
 					* Math.sin((double) i / (double) period
-							+ (6.2831853071795862D * (double) phase)
-							/ (double) frames);
+					+ (6.2831853071795862D * (double) phase)
+					/ (double) frames);
 			g.copyArea(0, i, w1, 1, (int) d, 0);
 			if (borderGap) {
 				g.setColor(color);
@@ -180,8 +180,8 @@ public class NewValidateCodeUtils {
 		for (int i = 0; i < w1; i++) {
 			double d = (double) (period >> 1)
 					* Math.sin((double) i / (double) period
-							+ (6.2831853071795862D * (double) phase)
-							/ (double) frames);
+					+ (6.2831853071795862D * (double) phase)
+					/ (double) frames);
 			g.copyArea(i, 0, 1, h1, 0, (int) d);
 			if (borderGap) {
 				g.setColor(color);
@@ -204,9 +204,9 @@ public class NewValidateCodeUtils {
 		return code.toLowerCase();
 	}
 
-	// ʹ�÷�������Servlet�����������룩
+	// 使用方法（在Servlet中添加下面代码）
 	// CreateValidateCode vCode = new CreateValidateCode(100, 30, 5, 10);
-	// session.setAttribute("code", vCode.getCode()); //������Session������
+	// session.setAttribute("code", vCode.getCode()); //保存在Session作用域
 	// vCode.write(response.getOutputStream());
-	
+
 }
