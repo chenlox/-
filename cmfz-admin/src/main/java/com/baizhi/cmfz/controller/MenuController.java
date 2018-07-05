@@ -23,9 +23,6 @@ public class MenuController {
     @ResponseBody
     public List<Menu> showMenu(){
         List<Menu> menus = ms.queryMenu();
-        for (Menu menu : menus) {
-            System.out.println(menu);
-        }
         return menus;
     }
    /* public String showMenu(Model model){

@@ -21,12 +21,13 @@ public class PictureServiceImpl implements PictureService {
 
     @Override
     @Transactional(propagation=Propagation.SUPPORTS,readOnly=true)
-    public Map<Integer,Object> queryAllPicture(Integer page, Integer rows) {
+    public Map<String,Object> queryAllPicture(Integer page, Integer rows) {
         Integer nowPage = (page - 1) * rows;
         List<Picture> pictures = pd.selectAllPicture(nowPage, rows);
         Integer count = pd.selectCount();
-        Map<Integer,Object> map = new HashMap<Integer,Object>();
-        map.put(count,pictures);
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("total",count);
+        map.put("rows",pictures);
         return map;
     }
 }

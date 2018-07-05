@@ -17,8 +17,8 @@ public class PictureController {
 
     @RequestMapping("/showAllPicture")
     @ResponseBody
-    public Map<Integer,Object> showAllPicture(Integer page, Integer rows){
-        Map<Integer, Object> map = ps.queryAllPicture(page, rows);
+    public Map<String,Object> showAllPicture(Integer page, Integer rows){
+        Map<String, Object> map = ps.queryAllPicture(page, rows);
         System.out.println(map);
         return map;
     }

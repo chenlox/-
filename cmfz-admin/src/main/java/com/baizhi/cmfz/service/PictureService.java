@@ -8,6 +8,6 @@ import java.util.Map;
 public interface PictureService {
 
 
-    public Map<Integer,Object> queryAllPicture(Integer page, Integer rows);
+    public Map<String,Object> queryAllPicture(Integer page, Integer rows);
 
 }
