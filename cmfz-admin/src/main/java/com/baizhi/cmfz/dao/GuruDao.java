@@ -17,10 +17,10 @@ public interface GuruDao {
 
     public int updateGuru(Guru guru);
 
-    public List<Guru> selectAllGuru(@Param("value") String value,@Param("page") Integer nowPage, @Param("rows") Integer rows);
+    public List<Guru> selectAllGuru(@Param("value1") String value1,@Param("page") Integer nowPage, @Param("rows") Integer rows);
 
     public int insertGuru(Guru guru);
 
-    public int count();
+    public int count(@Param("value1") String value1);
 
 }

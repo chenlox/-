@@ -64,8 +64,11 @@ public class GuruServiceImpl implements GuruService {
         if(value != null){
             value1 = "%"+value+"%";
         }
+        System.out.println(value);
+        System.out.println(value1);
         List<Guru> gurus = gd.selectAllGuru(value1,(page - 1) * rows, rows);
-        int count = gd.count();
+        System.out.println(gurus);
+        int count = gd.count(value1);
         Map<String, Object> map = new HashMap<>();
         map.put("total",count);
         map.put("rows",gurus);

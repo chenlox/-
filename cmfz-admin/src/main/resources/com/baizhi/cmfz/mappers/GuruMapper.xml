@@ -17,8 +17,8 @@
     <select id="selectAllGuru" resultMap="GuruMap">
         select * from t_guru
         <where>
-            <if test="value != null">
-            guru_name like #{value}
+            <if test="value1 != null">
+            guru_name like #{value1}
         </if>
         </where>
         limit #{page},#{rows}
@@ -36,6 +36,11 @@
 
     <select id="count" resultType="java.lang.Integer">
         select count(*) from t_guru
+        <where>
+            <if test="value1 != null">
+                guru_name like #{value1}
+            </if>
+        </where>
     </select>
 
 </mapper>
