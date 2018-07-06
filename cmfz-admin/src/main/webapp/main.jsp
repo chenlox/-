@@ -42,7 +42,6 @@
         if(b){
             $("#tt").tabs("select",menuName);
         }else{
-            alert(menuUrl);
             $("#tt").tabs("add",{
                 title:menuName,
                 closable:"true",

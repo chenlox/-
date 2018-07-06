@@ -18,8 +18,8 @@
         select * from t_guru
         <where>
             <if test="value != null">
-                guru_name like #{value}
-            </if>
+            guru_name like #{value}
+        </if>
         </where>
         limit #{page},#{rows}
     </select>

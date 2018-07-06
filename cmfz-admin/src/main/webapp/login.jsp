@@ -13,17 +13,18 @@
 	<script type="text/javascript" src="script/jquery.js"></script>
 	<script type="text/javascript" src="script/common.js"></script>
 	<script type="text/javascript">
-	
-		$(function(){
-			//点击更换验证码：
-			$("#captchaImage").click(function(){//点击更换验证码
-			});
-			
-			//  form 表单提交
-			$("#loginForm").bind("submit",function(){
-
-			});
-		});
+		onload=function(){
+            $.post("${pageContext.request.contextPath}/manager/getCookie.do" /*{ name: "John", time: "2pm" }*/,
+                function(data){
+                    $.each(data,function(index,object){
+						if(index == 0){
+						    $("#t1").val(""+object);
+						}else if(index == 1){
+						    $("#t2").val(object);
+						}
+                    })
+                });
+		}
 
 		function add(){
 		    location.href="${pageContext.request.contextPath}/register.jsp";
@@ -45,7 +46,7 @@
 								用户名:
 							</th>
 							<td>
-								<input type="text"  name="managerName" class="text" value="" maxlength="20"/>
+								<input id="t1" type="text"  name="managerName" class="text" value="" maxlength="20"/>
 							</td>
 					  </tr>
 					  <tr>
@@ -53,7 +54,7 @@
 								密&nbsp;&nbsp;&nbsp;码:
 							</th>
 							<td>
-								<input type="password" name="ManagerPassword" class="text" value="" maxlength="20" autocomplete="off"/>
+								<input id="t2" type="password" name="ManagerPassword" class="text" value="" maxlength="20" autocomplete="off"/>
 							</td>
 					  </tr>
 					
@@ -75,7 +76,7 @@
 						</th>
 						<td>
 							<label>
-								<input type="checkbox" id="isRememberUsername" value="true"/> 记住用户名
+								<input type="checkbox" name="click" id="isRememberUsername" value="true"/> 记住用户名
 							</label>
 						</td>
 					</tr>
