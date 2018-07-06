@@ -1,11 +1,20 @@
 package com.baizhi.cmfz.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.Date;
 
+
+/**
+ * @Descriiption    manager对象的实体类
+ * @Author      陈龙祥
+ * @Time       2018-07-05 14:54:00
+ */
 public class Picture {
 
     private String pictureId;
     private String picturePath;
+    @JSONField(format = "yyyy-mm-dd dd:MM:ss")
     private Date pictureDate;
     private String pictureDesc;
     private String pictureStatus;

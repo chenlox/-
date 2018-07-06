@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.cmfz.dao.GuruDao">
+
+    <resultMap id="GuruMap" type="com.baizhi.cmfz.entity.Guru">
+        <id property="guruId" column="guru_id"></id>
+        <result property="guruName" column="guru_name"></result>
+        <result property="guruPhoto" column="guru_photo"></result>
+        <result property="guruSummary" column="guru_summary"></result>
+    </resultMap>
+
+    <!--<select id="selectGuru" resultMap="GuruMap">
+        select * from t_guru
+        where guru_id = #{guruId}
+    </select>-->
+
+    <select id="selectAllGuru" resultMap="GuruMap">
+        select * from t_guru
+        <where>
+            <if test="value != null">
+                guru_name like #{value}
+            </if>
+        </where>
+        limit #{page},#{rows}
+    </select>
+
+    <insert id="insertGuru">
+        insert into t_guru
+        values(#{guruId},#{guruName},#{guruPhoto},#{guruSummary})
+    </insert>
+
+    <update id="updateGuru">
+        update t_guru set guru_name = #{guruName} , guru_photo = #{guruPhoto} , guru_summary = #{guruSummary}
+        where guru_id = #{guruId}
+    </update>
+
+    <select id="count" resultType="java.lang.Integer">
+        select count(*) from t_guru
+    </select>
+
+</mapper>

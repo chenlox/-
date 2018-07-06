@@ -2,6 +2,12 @@ package com.baizhi.cmfz.entity;
 
 import java.util.List;
 
+
+/**
+ * @Descriiption    menu对象的实体类
+ * @Author      陈龙祥
+ * @Time       2018-07-05 10:54:00
+ */
 public class Menu {
 
     private String menuId;

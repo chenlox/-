@@ -11,6 +11,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
 
+
+/**
+ * @Description 菜单控制层,控制页面跳转
+ * @Author  陈龙祥
+ * @Time    2018-07-05 11:30:30
+ */
 @Controller
 @RequestMapping("/Menu")
 @SessionAttributes(value = "menus")
@@ -25,16 +31,5 @@ public class MenuController {
         List<Menu> menus = ms.queryMenu();
         return menus;
     }
-   /* public String showMenu(Model model){
-        List<Menu> menus = ms.queryMenu();
-        for (Menu menu : menus) {
-            System.out.println(menu);
-        }
-        model.addAttribute("menus",menus);
-
-        return "redirect:/main.jsp";
-
-    }*/
-
 
 }

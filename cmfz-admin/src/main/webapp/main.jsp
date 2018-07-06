@@ -20,7 +20,6 @@
 			dataType:"json",
 			url:"${pageContext.request.contextPath}/Menu/showMenu.do",
 			success:function(res){
-                console.log(res);
                 $.each(res,function(index, obj){
 					var content = "";
 					$.each(obj.secondMenu,function(index1, obj1) {
@@ -43,10 +42,11 @@
         if(b){
             $("#tt").tabs("select",menuName);
         }else{
+            alert(menuUrl);
             $("#tt").tabs("add",{
                 title:menuName,
                 closable:"true",
-                href:"${pageContext.request.contextPath}/picture.jsp",
+                href:"${pageContext.request.contextPath}/"+menuUrl,
             });
         }
     }

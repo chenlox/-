@@ -11,14 +11,25 @@
     </resultMap>
 
     <select id="selectAllPicture" resultMap="PictureMap">
-
         select * from t_picture limit #{page},#{rows}
+    </select>
 
+    <select id="selectPicture" resultMap="PictureMap">
+        select * from t_picture where picture_id = #{pictureId}
     </select>
 
 
     <select id="selectCount" resultType="java.lang.Integer">
         select count(*) from t_picture
     </select>
+
+    <insert id="insertPicture">
+        insert into t_picture values(#{pictureId},#{picturePath},SYSDATE(),#{pictureDesc},#{pictureStatus})
+    </insert>
+
+    <update id="updatePicture">
+        update t_picture set picture_description = #{pictureDesc},picture_status = #{pictureStatus}
+        where picture_id = #{pictureId}
+    </update>
 
 </mapper>
