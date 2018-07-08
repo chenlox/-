@@ -42,7 +42,7 @@
 
     function add(){
         $("#dd_guru").dialog({
-            title: "新增轮播图",
+            title: "新增上师",
             width: 400,
             height: 250,
             closed: false,
@@ -51,6 +51,19 @@
             maximizable:true,
             collapsible:true,
             href:"${pageContext.request.contextPath}/addGuru.jsp",
+        });
+    }
+    function addAll(){
+        $("#dd_guru").dialog({
+            title: "批量上传",
+            width: 400,
+            height: 250,
+            closed: false,
+            modal: true,
+            minimizable:true,
+            maximizable:true,
+            collapsible:true,
+            href:"${pageContext.request.contextPath}/addAllGuru.jsp",
         });
     }
     function modify(){
@@ -74,6 +87,7 @@
 <div id="td_guru" style="display:none">
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true,text:'修改上师信息'" onclick="modify()"></a>
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true,text:'新增上师'" onclick="add()"></a>
+    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true,text:'批量上传'" onclick="addAll()"></a>
    <input id="ss" class="easyui-searchbox" style="width:300px" data-options="searcher:qq,prompt:'请输入您输入查询的内容',menu:'#mm'" />
     <div id="mm" style="width:120px">
         <div data-options="key:'name',iconCls:'icon-ok'">guruName</div>

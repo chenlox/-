@@ -1,10 +1,13 @@
 package com.baizhi.cmfz.controller;
 
-
+import cn.afterturn.easypoi.excel.ExcelImportUtil;
+import cn.afterturn.easypoi.excel.entity.ImportParams;
 import com.baizhi.cmfz.entity.Guru;
 import com.baizhi.cmfz.service.GuruService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -75,4 +79,15 @@ public class GuruController {
     }
 
 
+    @RequestMapping("/addAllGuru")
+    @ResponseBody
+    public int addAllGuru(MultipartFile file) throws Exception {
+        ImportParams params = new ImportParams();
+        List<Guru> gurus  = ExcelImportUtil.importExcel(file.getInputStream(), Guru.class, params);
+        for (Guru guru : gurus) {
+            gs.addGuru(guru);
+        }
+        return 1;
+
+    }
 }

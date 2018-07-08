@@ -4,6 +4,7 @@ package com.baizhi.cmfz.dao;
 import com.baizhi.cmfz.entity.Guru;
 import org.apache.ibatis.annotations.Param;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**

@@ -2,6 +2,7 @@ package com.baizhi.cmfz.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
+import java.io.Serializable;
 import java.util.Date;
 
 
@@ -10,7 +11,7 @@ import java.util.Date;
  * @Author      陈龙祥
  * @Time       2018-07-05 14:54:00
  */
-public class Picture {
+public class Picture implements Serializable {
 
     private String pictureId;
     private String picturePath;

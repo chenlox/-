@@ -1,5 +1,6 @@
 package com.baizhi.cmfz.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -8,7 +9,7 @@ import java.util.List;
  * @Author      陈龙祥
  * @Time       2018-07-05 10:54:00
  */
-public class Menu {
+public class Menu implements Serializable {
 
     private String menuId;
     private String menuName;
