@@ -13,7 +13,7 @@
 
     <insert id="insertArticle">
         insert into t_article
-        values(#{articleId},#{articleName},#{guruId},#{introduction},#{date},#{articlePic})
+        values(#{articleId},#{articleName},#{guruId},#{introduction},sysdate())
     </insert>
 
 </mapper>

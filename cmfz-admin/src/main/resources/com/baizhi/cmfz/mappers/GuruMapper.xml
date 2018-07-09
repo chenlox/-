@@ -43,4 +43,9 @@
         </where>
     </select>
 
+
+    <select id="selectAll" resultMap="GuruMap">
+        select * from t_guru
+    </select>
+
 </mapper>

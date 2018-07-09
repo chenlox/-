@@ -88,6 +88,11 @@ public class GuruController {
             gs.addGuru(guru);
         }
         return 1;
+    }
 
+    @RequestMapping("/showAll")
+    @ResponseBody
+    public List<Guru> showAll(){
+        return gs.queryAll();
     }
 }

@@ -3,6 +3,7 @@ package com.baizhi.cmfz.service;
 
 import com.baizhi.cmfz.entity.Guru;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,5 +18,7 @@ public interface GuruService {
     public int modifyGuru(Guru guru);
 
     public Map<String,Object> queryAllGuru(String value,Integer page, Integer rows);
+
+    public List<Guru> queryAll();
 
 }

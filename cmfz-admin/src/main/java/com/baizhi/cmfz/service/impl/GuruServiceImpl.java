@@ -74,4 +74,9 @@ public class GuruServiceImpl implements GuruService {
         map.put("rows",gurus);
         return map;
     }
+
+    @Override
+    public List<Guru> queryAll() {
+        return gd.selectAll();
+    }
 }

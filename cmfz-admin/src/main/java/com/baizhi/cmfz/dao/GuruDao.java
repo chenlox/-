@@ -24,4 +24,6 @@ public interface GuruDao {
 
     public int count(@Param("value1") String value1);
 
+    public List<Guru> selectAll();
+
 }

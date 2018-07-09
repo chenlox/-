@@ -5,8 +5,10 @@ import com.baizhi.cmfz.entity.Manager;
 import com.baizhi.cmfz.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -39,6 +41,7 @@ public class ManagerController {
         }
         Manager manager = ms.queryManager(mgr);
         if(manager != null){
+            session.setAttribute("manager",manager);
             if(click != null){
                 Cookie c1 = new Cookie("name",URLEncoder.encode(mgr.getManagerName(),"UTF-8"));
                 Cookie c2 = new Cookie("password",mgr.getManagerPassword());
