@@ -1,8 +1,6 @@
 <%@ page contentType="text/html;charset=utf-8" pageEncoding="utf-8" isELIgnored="false" %>
 <script type="text/javascript">
     $(function(){
-
-
         $("#t_picture").datagrid({
             width:500,
             height:250,
@@ -16,16 +14,7 @@
             columns:[[
                 {field:"pictureId",title:"轮播图编号",width:80,align:"center"},
                 {field:"picturePath",title:"路径",width:100,sortable:true,align:"center"},
-                {field:"pictureDate",title:"创建时间",width:80,align:"center",sortable:true,
-                    /*formatter: function(value,row,index){
-                        if (row.picture){
-                            return row.picture.pictureDate;
-                        } else {
-                            return value;
-                        }
-                    }*/
-
-                },
+                {field:"pictureDate",title:"创建时间",width:80,align:"center",sortable:true,},
                 {field:"pictureDesc",title:"描述信息",width:80,align:"center",sortable:true},
                 {field:"pictureStatus",title:"轮播图状态",width:150,sortable:true,align:"center"},
                 {field:"operation",title:'操作',width:60,align:'center',align:"center"}

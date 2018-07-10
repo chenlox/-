@@ -50,6 +50,7 @@ public class ArticleController {
             String uploadPath = realPath.substring(0,realPath.lastIndexOf("\\"))+"\\upload";
             if(files != null && files.length != 0){
                 for (MultipartFile file : files) {
+
                     String fileName = UUID.randomUUID().toString()+"."+ FilenameUtils.getExtension(file.getOriginalFilename());
                     // 将上传的文件转存到服务器中存储
                     file.transferTo(new File(uploadPath+"\\"+fileName));

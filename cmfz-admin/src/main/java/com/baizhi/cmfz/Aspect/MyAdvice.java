@@ -7,9 +7,7 @@ import com.baizhi.cmfz.service.LogService;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -18,7 +16,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import java.lang.reflect.Method;
 
 
 /**
@@ -41,7 +38,9 @@ public class MyAdvice {
     public Object around(ProceedingJoinPoint pjp) throws Throwable {
 
 
+        //获取操作源类型
         String tarName = pjp.getTarget().getClass().getName();
+        System.out.println(tarName);
         tarName=tarName.substring(tarName.lastIndexOf(".")+1);
         tarName=tarName.substring(0,tarName.indexOf("ServiceImpl"));
         if(tarName.equals("Log")){
@@ -50,21 +49,25 @@ public class MyAdvice {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
         Log log=new Log();
+        //获取session中存储的管理员对象
         Manager manager=(Manager)session.getAttribute("manager");
         if(manager!=null){
             log.setManagerName(manager.getManagerName());//操作者
         }else{
             log.setManagerName(null);
         }
-        Object[] args = pjp.getArgs();//获得目标类参数
+        //获得目标类参数
+        Object[] args = pjp.getArgs();
         String message="";
         for (Object object:args){
             message=message+object+"-";
         }
         log.setLogMessage(message);//参数信息
-        MethodSignature signature =(MethodSignature) pjp.getSignature();
+        /*MethodSignature signature =(MethodSignature) pjp.getSignature();
         Method method = signature.getMethod();
-        String methodName = method.getName();
+        String methodName = method.getName();*/
+        //获取调用方法名
+        String  methodName = pjp.getSignature().getName();
         //action
         if(methodName.contains("add")){
             log.setLogAction("新增");
@@ -76,6 +79,7 @@ public class MyAdvice {
         //结果
         Object proceed=null;
         try {
+            //执行完方法的返回值:proceed
             proceed = pjp.proceed();
             log.setLogResult("success");
         } catch (Throwable throwable) {
@@ -84,7 +88,6 @@ public class MyAdvice {
         }
 
         log.setLogResource(tarName);
-        System.out.println(log);
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("/applicationContext.xml");
         LogService logService = (LogService) applicationContext.getBean("logServiceImpl");
         logService.addLog(log);

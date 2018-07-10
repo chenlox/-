@@ -47,6 +47,8 @@ public class ManagerController {
                 Cookie c2 = new Cookie("password",mgr.getManagerPassword());
                 response.addCookie(c1);
                 response.addCookie(c2);
+                c1.setMaxAge(-1);
+                c1.setMaxAge(-1);
             }else{
                 Cookie c1 = new Cookie("name",null);
                 Cookie c2 = new Cookie("password",null);

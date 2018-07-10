@@ -3,7 +3,6 @@ package com.baizhi.cmfz.controller;
 
 import com.baizhi.cmfz.entity.Log;
 import com.baizhi.cmfz.service.LogService;
-import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +16,6 @@ public class LogController {
 
     @Autowired
     private LogService ls;
-
 
     @RequestMapping("/addLog")
     @ResponseBody

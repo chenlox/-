@@ -18,7 +18,7 @@
     </insert>
 
     <select id="selectAllLog" resultMap="LogMap">
-        select * from t_log limit #{page},#{rows}
+        select * from t_log order by log_time DESC limit #{page},#{rows}
     </select>
 
     <select id="count" resultType="java.lang.Integer">

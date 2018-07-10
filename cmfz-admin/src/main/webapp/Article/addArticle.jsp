@@ -27,16 +27,16 @@
                         return true;
                     },
                     success:function(res){
-                        alert(res);
-                        /*var d = JSON.parse(res);*/
                         if(res != null){
                             $.messager.show({
                                 title:"我的消息",
-                                msg:"消息框将在3秒后关闭",
+                                msg:"添加成功,消息框将在3秒后关闭",
                                 timeout:3000,
                                 showType:"slide",
                             });
                         }
+                        $("#ff_article").form("reset");
+                        editor.txt.clear();
                     }
                 });
             }

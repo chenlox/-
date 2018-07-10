@@ -1,11 +1,14 @@
 package com.baizhi.cmfz.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.Date;
 
 public class Log {
 
     private String logId;
     private String managerName;
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date logTime;
     private String logResource;
     private String logAction;
