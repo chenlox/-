@@ -17,11 +17,11 @@
             $.post("${pageContext.request.contextPath}/manager/getCookie.do" /*{ name: "John", time: "2pm" }*/,
                 function(data){
                     $.each(data,function(index,object){
-						if(index == 0){
-						    $("#t1").val(""+object);
-						}else if(index == 1){
-						    $("#t2").val(object);
-						}
+                        if(index == 0){
+                            $("#t1").val(""+object);
+                        }else if(index == 1){
+                            $("#t2").val(object);
+                        }
                     })
                 });
 		}
@@ -32,7 +32,6 @@
 	</script>
 </head>
 <body>
-	
 		<div class="login">
 			<form id="loginForm" action="${pageContext.request.contextPath}/manager/login.do" method="post" >
 				
@@ -77,6 +76,7 @@
 						<td>
 							<label>
 								<input type="checkbox" name="click" id="isRememberUsername" value="true"/> 记住用户名
+								<input type="checkbox" name="rememberMe" /> 七天免登录
 							</label>
 						</td>
 					</tr>

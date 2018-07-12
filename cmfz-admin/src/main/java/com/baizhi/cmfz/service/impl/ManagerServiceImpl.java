@@ -2,14 +2,18 @@ package com.baizhi.cmfz.service.impl;
 
 import com.baizhi.cmfz.dao.ManagerDao;
 import com.baizhi.cmfz.entity.Manager;
+import com.baizhi.cmfz.entity.Permission;
+import com.baizhi.cmfz.entity.Role;
 import com.baizhi.cmfz.service.ManagerService;
 import com.baizhi.cmfz.util.EncryptionUtils;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -36,14 +40,14 @@ public class ManagerServiceImpl implements ManagerService {
     @Transactional(propagation=Propagation.SUPPORTS,readOnly=true)
     public Manager queryManager(Manager mgr) {
         Manager manager = md.selectManager(mgr.getManagerName());
-        if(manager != null){
+        /*if(manager != null){
             String s = mgr.getManagerPassword()+""+manager.getSalt();
             String password = DigestUtils.md5Hex(s);
             if(manager.getManagerPassword().equals(password)){
                 return manager;
             }
-        }
-        return null;
+        }*/
+        return manager;
 
     }
 
@@ -54,10 +58,21 @@ public class ManagerServiceImpl implements ManagerService {
         String salt = EncryptionUtils.getRandomSalt(6);
         System.out.println(salt);
         mgr.setSalt(salt);
-        String s = mgr.getManagerPassword()+""+salt;
-        String password = DigestUtils.md5Hex(s);
-        mgr.setManagerPassword(password);
+        //String s = mgr.getManagerPassword()+""+salt;
+        Md5Hash md5Hash = new Md5Hash(mgr.getManagerPassword(), salt, 1024);
+        //String password = DigestUtils.md5Hex(s);
+        mgr.setManagerPassword(md5Hash.toString());
         System.out.println(mgr);
         return md.insertManager(mgr);
+    }
+
+    @Override
+    public List<Role> queryRolesByManagername(String managerName) {
+        return md.selectRolesByManagername(managerName);
+    }
+
+    @Override
+    public List<Permission> queryPermissionByManagername(String managerName) {
+        return md.selectPermissionByManagername(managerName);
     }
 }

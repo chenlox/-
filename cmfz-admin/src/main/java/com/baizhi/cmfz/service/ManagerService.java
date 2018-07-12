@@ -1,6 +1,10 @@
 package com.baizhi.cmfz.service;
 
 import com.baizhi.cmfz.entity.Manager;
+import com.baizhi.cmfz.entity.Permission;
+import com.baizhi.cmfz.entity.Role;
+
+import java.util.List;
 
 
 /**
@@ -13,5 +17,9 @@ public interface ManagerService {
     public Manager queryManager(Manager mgr);
 
     public int addManager(Manager mgr);
+
+    public List<Role> queryRolesByManagername(String managerName);
+
+    public List<Permission> queryPermissionByManagername(String managerName);
 
 }

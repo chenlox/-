@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=utf-8" pageEncoding="utf-8" isELIgnored="false" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <script type="text/javascript">
     $(function(){
         $("#t_guru").datagrid({
@@ -87,7 +88,9 @@
 <div id="td_guru" style="display:none">
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true,text:'修改上师信息'" onclick="modify()"></a>
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true,text:'新增上师'" onclick="add()"></a>
-    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true,text:'批量上传'" onclick="addAll()"></a>
+    <shiro:hasAnyRoles name="root,admin">
+        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true,text:'批量上传'" onclick="addAll()"></a>
+    </shiro:hasAnyRoles>
    <input id="ss" class="easyui-searchbox" style="width:300px" data-options="searcher:qq,prompt:'请输入您输入查询的内容',menu:'#mm'" />
     <div id="mm" style="width:120px">
         <div data-options="key:'name',iconCls:'icon-ok'">guruName</div>

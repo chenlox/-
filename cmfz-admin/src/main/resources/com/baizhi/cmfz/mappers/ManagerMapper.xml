@@ -24,4 +24,30 @@
 
     </insert>
 
+    <select id="selectRolesByManagername" resultType="Role">
+        SELECT role_id roleId, role_name roleName, role_tag  roleTag
+        FROM t_role
+        WHERE role_id IN ( SELECT role_id
+                           FROM manager_role
+                           WHERE manager_id = (SELECT manager_id
+                                               FROM t_manager
+                                               WHERE manager_name = #{managerName}
+                                               )
+                         )
+    </select>
+
+    <select id="selectPermissionByManagername" resultType="Permission">
+        SELECT permission_id permissionId, resource_name resourceName, resource_tag  resourceTag, resource_url  resourceUrl, permission_tag permissionTag
+        FROM t_permission
+        WHERE permission_id IN (SELECT permission_id
+                                FROM role_permission
+                                WHERE role_id IN (SELECT role_id FROM manager_role
+                                                  WHERE manager_id = (SELECT manager_id
+                                                                      FROM t_manager
+                                                                      WHERE manager_name = #{managerName}
+                                                                      )
+                                                  )
+        )
+    </select>
+
 </mapper>

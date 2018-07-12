@@ -3,6 +3,12 @@ package com.baizhi.cmfz.controller;
 
 import com.baizhi.cmfz.entity.Manager;
 import com.baizhi.cmfz.service.ManagerService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,31 +40,41 @@ public class ManagerController {
     private ManagerService ms;
 
     @RequestMapping("/login")
-    public String login(String click, Manager mgr, String enCode, HttpSession session, HttpServletResponse response) throws UnsupportedEncodingException {
+    public String login(String click, Manager mgr, String enCode, HttpSession session, HttpServletResponse response,Boolean rememberMe) throws UnsupportedEncodingException {
         String code = (String) session.getAttribute("code");
+        System.out.println(rememberMe);
         if(enCode == null || !enCode.equalsIgnoreCase(code)){
             return "redirect:/login.jsp";
         }
-        Manager manager = ms.queryManager(mgr);
-        if(manager != null){
-            session.setAttribute("manager",manager);
+        Subject subject = SecurityUtils.getSubject();
+        try {
+            subject.login(new UsernamePasswordToken(mgr.getManagerName(),mgr.getManagerPassword(),rememberMe));
+            /*Manager manager = ms.queryManager(mgr);
+            session.setAttribute("manager",manager);*/
             if(click != null){
                 Cookie c1 = new Cookie("name",URLEncoder.encode(mgr.getManagerName(),"UTF-8"));
                 Cookie c2 = new Cookie("password",mgr.getManagerPassword());
                 response.addCookie(c1);
                 response.addCookie(c2);
-                c1.setMaxAge(-1);
-                c1.setMaxAge(-1);
+                c1.setMaxAge(60*60*24);
+                c1.setMaxAge(60*60*24);
             }else{
                 Cookie c1 = new Cookie("name",null);
                 Cookie c2 = new Cookie("password",null);
                 response.addCookie(c1);
                 response.addCookie(c2);
             }
-
             return "redirect:/main.jsp";
+        } catch (UnknownAccountException e) {
+            e.printStackTrace();
+            return "redirect:/login.jsp";
+        } catch (IncorrectCredentialsException ice){
+            ice.printStackTrace();
+            return "redirect:/login.jsp";
+        } catch (AuthenticationException ae){
+            ae.printStackTrace();
+            return "redirect:/login.jsp";
         }
-        return "redirect:/login.jsp";
     }
 
     @RequestMapping("/register")
